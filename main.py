@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask import url_for, render_template, json, redirect, request, abort
 
@@ -169,7 +171,10 @@ def news_delete(id):
 
 def main():
     db_session.global_init("db/blogs.sqlite")
-    app.run()
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)
+    # app.run(port=5000, host='127.0.0.1')
+
 
 
 if __name__ == '__main__':
